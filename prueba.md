@@ -40,6 +40,9 @@ El usuario ha enviado un ticket indicando los siguientes problemas:
 ### **2. “El cálculo del año anterior en el gráfico de barras no funciona.”**
 - Ajustar la medida para que el gráfico muestre correctamente el valor del año anterior  
 
+### **3. “Hay un Rol creado para ciertos vendedores, al entrar ven todo vacio.”**
+- Revisar RLS del informe y corregir ROL con problema
+
 ---
 
 ## 🎨 3. Migración a Nuevo Look & Feel
