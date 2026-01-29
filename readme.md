@@ -1,4 +1,4 @@
-# Informe de Ventas – Artefacto Power BI (PBIP)
+# Artefacto Power BI (PBIP)
 
 ## Versión del Artefacto
 - **Versión:** v1.0.0  
