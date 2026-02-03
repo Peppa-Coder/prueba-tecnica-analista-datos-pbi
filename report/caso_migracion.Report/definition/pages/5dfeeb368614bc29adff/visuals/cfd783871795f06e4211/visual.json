@@ -20,14 +20,29 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Datos"
+                      "Entity": "Calendario"
                     }
                   },
                   "Property": "Año"
                 }
               },
-              "queryRef": "Datos.Año",
+              "queryRef": "Calendario.Año",
               "nativeQueryRef": "Año",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Calendario"
+                    }
+                  },
+                  "Property": "MesNomAB"
+                }
+              },
+              "queryRef": "Calendario.MesNomAB",
+              "nativeQueryRef": "MesNomAB",
               "active": true
             }
           ]
@@ -60,11 +75,11 @@
                       "Entity": "Medidas"
                     }
                   },
-                  "Property": "Arriendos_Año_anterior"
+                  "Property": "Arriendos_Año_Anterior"
                 }
               },
               "queryRef": "Medidas.Arriendos_Año_anterior",
-              "nativeQueryRef": "Arriendos_Año_anterior"
+              "nativeQueryRef": "Arriendos_Año_Anterior"
             }
           ]
         }
@@ -73,19 +88,31 @@
         "sort": [
           {
             "field": {
-              "Measure": {
+              "Column": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "Medidas"
+                    "Entity": "Calendario"
                   }
                 },
-                "Property": "Total Arriendos"
+                "Property": "Año"
               }
             },
-            "direction": "Descending"
+            "direction": "Ascending"
+          },
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Calendario"
+                  }
+                },
+                "Property": "MesNomAB"
+              }
+            },
+            "direction": "Ascending"
           }
-        ],
-        "isDefaultSort": true
+        ]
       }
     },
     "objects": {
@@ -167,10 +194,45 @@
                   }
                 }
               }
+            },
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
             }
           },
           "selector": {
             "metadata": "Medidas.Total Arriendos"
+          }
+        },
+        {
+          "properties": {
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
+                }
+              }
+            },
+            "enableDetailDataLabel": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "8D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Medidas.Arriendos_Año_anterior"
           }
         }
       ],

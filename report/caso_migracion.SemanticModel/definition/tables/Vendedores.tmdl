@@ -1,0 +1,43 @@
+table Vendedores
+	lineageTag: 41d722a7-4667-49f7-b2f2-41fe7fa19882
+
+	column Nombre
+		dataType: string
+		lineageTag: 67a1e6b1-7343-419c-84e8-b123b65574ae
+		summarizeBy: none
+		sourceColumn: Nombre
+
+		annotation SummarizationSetBy = Automatic
+
+	column Correo
+		dataType: string
+		lineageTag: d061e0e9-6248-47c8-ab9a-00bc2b5d7337
+		summarizeBy: none
+		sourceColumn: Correo
+
+		annotation SummarizationSetBy = Automatic
+
+	column Id_Genero
+		dataType: int64
+		formatString: 0
+		lineageTag: 02206e43-7afc-4aa1-a800-05c42afb8335
+		summarizeBy: none
+		sourceColumn: Id_Genero
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Vendedores = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\HR453WU\OneDrive - EY\Documents\GitHub\prueba-tecnica-analista-datos-pbi\data\DimVendedores.xlsx"), null, true),
+				    Sheet1_Sheet = Source{[Item="Sheet1",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Sheet1_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Nombre", type text}, {"Correo", type text}, {"Id_Genero", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	changedProperty = Name
+
+	annotation PBI_ResultType = Table
+

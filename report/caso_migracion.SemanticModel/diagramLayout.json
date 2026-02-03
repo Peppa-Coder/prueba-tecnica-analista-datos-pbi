@@ -4,14 +4,14 @@
     {
       "ordinal": 0,
       "scrollPosition": {
-        "x": 0,
-        "y": 0
+        "x": 420.54496333246925,
+        "y": 125.68859902954182
       },
       "nodes": [
         {
           "location": {
-            "x": 729.38305001469371,
-            "y": 0
+            "x": 811.93222057697574,
+            "y": 697.88295778909514
           },
           "nodeIndex": "Clientes",
           "nodeLineageTag": "4aece616-a908-474e-9f76-edb98adc8659",
@@ -23,8 +23,8 @@
         },
         {
           "location": {
-            "x": 329.3255819140287,
-            "y": 160.62793783746983
+            "x": 404.0697047757775,
+            "y": 519.53415584609161
           },
           "nodeIndex": "Datos",
           "nodeLineageTag": "cc55901e-3140-4167-9b60-721303c5bab1",
@@ -32,12 +32,12 @@
             "height": 468,
             "width": 234
           },
-          "zIndex": 5
+          "zIndex": 4
         },
         {
           "location": {
-            "x": 0,
-            "y": 0
+            "x": 436.25449301198944,
+            "y": 131.10618900471547
           },
           "nodeIndex": "Peliculas",
           "nodeLineageTag": "5d45bb68-dbfa-4070-bf34-dc1344e7951d",
@@ -45,25 +45,25 @@
             "height": 224,
             "width": 234
           },
-          "zIndex": 4
+          "zIndex": 5
         },
         {
           "location": {
-            "x": 657.35548985450646,
-            "y": 642.390517765573
+            "x": 0,
+            "y": 492.71498624946764
           },
           "nodeIndex": "Calendario",
-          "nodeLineageTag": "046df453-4354-4303-8dfb-489c891c14b0",
+          "nodeLineageTag": "ea0191fe-159d-4731-9887-661bfc131a6f",
           "size": {
-            "height": 200,
+            "height": 294.8060689131263,
             "width": 237
           },
-          "zIndex": 6
+          "zIndex": 8
         },
         {
           "location": {
-            "x": 1017.1133942596604,
-            "y": 301.90542782575614
+            "x": 72.9565885413405,
+            "y": 903.19616626234756
           },
           "nodeIndex": "Tabla Dólar",
           "nodeLineageTag": "0ff0c5fb-2578-4656-8646-4a7631b7c5b7",
@@ -76,7 +76,7 @@
         {
           "location": {
             "x": 1406.3830500146937,
-            "y": 324.15000152587891
+            "y": 358.71807196078362
           },
           "nodeIndex": "Medidas",
           "nodeLineageTag": "72887eff-e0b8-4393-8f1d-f7ffc40e3a67",
@@ -85,10 +85,36 @@
             "width": 234
           },
           "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 829.9892201340524,
+            "y": 106.38604568108205
+          },
+          "nodeIndex": "Generos",
+          "nodeLineageTag": "28f9bf85-540d-475f-8dcc-12451197a23a",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 846.20567456887125,
+            "y": 412.77594249642766
+          },
+          "nodeIndex": "Vendedores",
+          "nodeLineageTag": "41d722a7-4667-49f7-b2f2-41fe7fa19882",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 7
         }
       ],
       "name": "Todas las tablas",
-      "zoomValue": 50.346892102823141,
+      "zoomValue": 63.287087723234116,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,

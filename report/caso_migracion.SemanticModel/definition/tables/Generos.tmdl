@@ -1,0 +1,32 @@
+table Generos
+	lineageTag: 28f9bf85-540d-475f-8dcc-12451197a23a
+
+	column Id_Género
+		formatString: 0
+		lineageTag: 29945228-78d6-452f-abe5-1272cf036a59
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Datos[Id_Género]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nombre Género'
+		lineageTag: 5813d756-97f9-48e0-848b-4afdff197807
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Datos[Nombre Género]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Generos = calculated
+		mode: import
+		source =
+				
+				SUMMARIZE(
+				    Datos,
+				    Datos[Id_Género],
+				    Datos[Nombre Género]
+				)
+
+	annotation PBI_Id = 2841b192dbd348ccb41226e9825a36e8
+

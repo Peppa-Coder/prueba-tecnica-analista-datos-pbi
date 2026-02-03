@@ -1,0 +1,7 @@
+expression StartDate = #date(2000, 1, 1) meta [IsParameterQuery=true, Type="Date", IsParameterQueryRequired=true]
+	lineageTag: edf1947d-3a11-4cea-be4a-b8856cbce43e
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Date
+

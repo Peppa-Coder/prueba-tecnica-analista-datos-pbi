@@ -142,11 +142,6 @@ table Datos
 		summarizeBy: none
 		sourceColumn: Fecha_Arriendo
 
-		variation Variación
-			isDefault
-			relationship: 82921132-8cb1-417f-aeb7-acf847cbd3b3
-			defaultHierarchy: LocalDateTable_237b03fc-f61c-4f75-983a-cddc7936af90.'Jerarquía de fechas'
-
 		annotation SummarizationSetBy = Automatic
 
 		annotation UnderlyingDateTimeDataType = Date
@@ -193,11 +188,6 @@ table Datos
 		summarizeBy: none
 		sourceColumn: Fecha_Devolución
 
-		variation Variación
-			isDefault
-			relationship: 0a83d16d-a755-47d3-b42d-66a02f63e834
-			defaultHierarchy: LocalDateTable_aab5d653-2040-47e2-82df-a7266a146f91.'Jerarquía de fechas'
-
 		annotation SummarizationSetBy = Automatic
 
 		annotation UnderlyingDateTimeDataType = Date
@@ -242,17 +232,17 @@ table Datos
 		mode: import
 		source =
 				let
-				    Origen = Folder.Files("C:\Users\mauri\OneDrive\Escritorio\Prueba 1 PB Avanzado\Datos"),
-				    #"C:\Users\mauri\OneDrive\Escritorio\Prueba 1 PB Avanzado\Datos\_FactArriendos xlsx" = Origen{[#"Folder Path"="C:\Users\mauri\OneDrive\Escritorio\Prueba 1 PB Avanzado\Datos\",Name="FactArriendos.xlsx"]}[Content],
-				    #"Libro de Excel importado" = Excel.Workbook(#"C:\Users\mauri\OneDrive\Escritorio\Prueba 1 PB Avanzado\Datos\_FactArriendos xlsx"),
-				    Datos_Sheet = #"Libro de Excel importado"{[Item="Datos",Kind="Sheet"]}[Data],
-				    #"Columnas quitadas" = Table.RemoveColumns(Datos_Sheet,{"Column23"}),
-				    #"Encabezados promovidos" = Table.PromoteHeaders(#"Columnas quitadas", [PromoteAllScalars=true]),
-				    #"Tipo cambiado" = Table.TransformColumnTypes(#"Encabezados promovidos",{{"Id_Arriendo", Int64.Type}, {"RUT", type text}, {"Apellido Paterno", type text}, {"Apellido Materno", type text}, {"Nombres", type text}, {"Dirección", type text}, {"Id_Comuna", Int64.Type}, {"Nombre Comuna", type text}, {"Id_Categoría", Int64.Type}, {"Nombre Categoría", type text}, {"Id_Género", Int64.Type}, {"Nombre Género", type text}, {"Id_Pelicula", Int64.Type}, {"Nombre Pelicula", type text}, {"Año", Int64.Type}, {"Protagonistas", type text}, {"Fecha_Arriendo", type date}, {"Director", type text}, {"Cantidad de Copias", Int64.Type}, {"Días Arriendo", Int64.Type}, {"Valor Arriendo Diario", Int64.Type}, {"Fecha_Devolución", type date}}),
-				    #"Rango insertado" = Table.AddColumn(#"Tipo cambiado", "Década", each let rangeSize = 10, offset = 0, inclusive = false, rangeIndex = Number.RoundDown(([Año] - offset) / rangeSize) in Text.From(rangeIndex * rangeSize + offset, "es-CL") & "-" & Text.From((rangeIndex + 1) * rangeSize + offset - (if inclusive then 1 else 0), "es-CL"), type text),
-				    #"Caracteres insertados eliminados" = Table.AddColumn(#"Rango insertado", "RUT sin máscara", each Text.Remove([RUT], {"-", "."}), type text)
+				    Origen = Folder.Files("C:\Users\HR453WU\OneDrive - EY\Documents\GitHub\prueba-tecnica-analista-datos-pbi\data"),
+				    #"C:\Users\HR453WU\OneDrive - EY\Documents\GitHub\prueba-tecnica-analista-datos-pbi\data\_FactArriendos xlsx" = Origen{[#"Folder Path"="C:\Users\HR453WU\OneDrive - EY\Documents\GitHub\prueba-tecnica-analista-datos-pbi\data\",Name="FactArriendos.xlsx"]}[Content],
+				    #"Imported Excel Workbook" = Excel.Workbook(#"C:\Users\HR453WU\OneDrive - EY\Documents\GitHub\prueba-tecnica-analista-datos-pbi\data\_FactArriendos xlsx"),
+				    Datos_Sheet = #"Imported Excel Workbook"{[Item="Datos",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Datos_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Id_Arriendo", Int64.Type}, {"RUT", type text}, {"Apellido Paterno", type text}, {"Apellido Materno", type text}, {"Nombres", type text}, {"Dirección", type text}, {"Id_Comuna", Int64.Type}, {"Nombre Comuna", type text}, {"Id_Categoría", Int64.Type}, {"Nombre Categoría", type text}, {"Id_Género", Int64.Type}, {"Nombre Género", type text}, {"Id_Pelicula", Int64.Type}, {"Nombre Pelicula", type text}, {"Año", Int64.Type}, {"Protagonistas", type text}, {"Fecha_Arriendo", type date}, {"Director", type text}, {"Cantidad de Copias", Int64.Type}, {"Días Arriendo", Int64.Type}, {"Valor Arriendo Diario", Int64.Type}, {"Fecha_Devolución", type date}, {"Column23", type any}}),
+				    #"Rango insertado" = Table.AddColumn(#"Changed Type", "Década", each let rangeSize = 10, offset = 0, inclusive = false, rangeIndex = Number.RoundDown(([Año] - offset) / rangeSize) in Text.From(rangeIndex * rangeSize + offset, "es-CL") & "-" & Text.From((rangeIndex + 1) * rangeSize + offset - (if inclusive then 1 else 0), "es-CL"), type text),
+				    #"Caracteres insertados eliminados" = Table.AddColumn(#"Rango insertado", "RUT sin máscara", each Text.Remove([RUT], {"-", "."}), type text),
+				    #"Removed Columns" = Table.RemoveColumns(#"Caracteres insertados eliminados",{"Column23"})
 				in
-				    #"Caracteres insertados eliminados"
+				    #"Removed Columns"
 
 	annotation PBI_NavigationStepName = Navegación
 

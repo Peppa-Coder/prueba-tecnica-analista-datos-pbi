@@ -86,13 +86,13 @@ table Clientes
 		mode: import
 		source =
 				let
-				    Origen = Folder.Files("C:\Users\mauri\OneDrive\Escritorio\Prueba 1 PB Avanzado\Datos"),
-				    #"C:\Users\mauri\OneDrive\Escritorio\Prueba 1 PB Avanzado\Datos\_DimClientes xlsx1" = Origen{[#"Folder Path"="C:\Users\mauri\OneDrive\Escritorio\Prueba 1 PB Avanzado\Datos\",Name="DimClientes.xlsx"]}[Content],
-				    #"Libro de Excel importado" = Excel.Workbook(#"C:\Users\mauri\OneDrive\Escritorio\Prueba 1 PB Avanzado\Datos\_DimClientes xlsx1"),
-				    Clientes_Sheet = #"Libro de Excel importado"{[Item="Clientes",Kind="Sheet"]}[Data],
-				    #"Encabezados promovidos" = Table.PromoteHeaders(Clientes_Sheet, [PromoteAllScalars=true]),
-				    #"Tipo cambiado" = Table.TransformColumnTypes(#"Encabezados promovidos",{{"RUT", type text}, {"Paterno", type text}, {"Materno", type text}, {"Nombre", type text}, {"Dirección", type text}, {"Comuna", type text}, {"Tipo Cliente", Int64.Type}}),
-				    #"Agregar columna personalizada" = Table.AddColumn(#"Tipo cambiado", "Nombre Cliente", each let splitNombre = Splitter.SplitTextByDelimiter(" ", QuoteStyle.None)([Nombre]) in Text.Combine({splitNombre{0}?, " ", [Paterno], " ", Text.Reverse(Text.Middle(Text.Reverse([Materno]), 1))}), type text),
+				    Origen = Folder.Files("C:\Users\HR453WU\OneDrive - EY\Documents\GitHub\prueba-tecnica-analista-datos-pbi\data"),
+				    #"C:\Users\HR453WU\OneDrive - EY\Documents\GitHub\prueba-tecnica-analista-datos-pbi\data\_DimClientes xlsx" = Origen{[#"Folder Path"="C:\Users\HR453WU\OneDrive - EY\Documents\GitHub\prueba-tecnica-analista-datos-pbi\data\",Name="DimClientes.xlsx"]}[Content],
+				    #"Imported Excel Workbook" = Excel.Workbook(#"C:\Users\HR453WU\OneDrive - EY\Documents\GitHub\prueba-tecnica-analista-datos-pbi\data\_DimClientes xlsx"),
+				    Clientes_Sheet = #"Imported Excel Workbook"{[Item="Clientes",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Clientes_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"RUT", type text}, {"Paterno", type text}, {"Materno", type text}, {"Nombre", type text}, {"Dirección", type text}, {"Comuna", type text}, {"Tipo Cliente", Int64.Type}}),
+				    #"Agregar columna personalizada" = Table.AddColumn(#"Changed Type", "Nombre Cliente", each let splitNombre = Splitter.SplitTextByDelimiter(" ", QuoteStyle.None)([Nombre]) in Text.Combine({splitNombre{0}?, " ", [Paterno], " ", Text.Reverse(Text.Middle(Text.Reverse([Materno]), 1))}), type text),
 				    #"Columna combinada insertada" = Table.AddColumn(#"Agregar columna personalizada", "Dirección Completa", each Text.Combine({[Dirección], ", ", [Comuna], ", Chile"}), type text),
 				    #"Texto en mayúsculas" = Table.TransformColumns(#"Columna combinada insertada",{{"Dirección Completa", Text.Upper, type text}}),
 				    #"Columna condicional agregada" = Table.AddColumn(#"Texto en mayúsculas", "Calificación Cliente", each if [Tipo Cliente] = 2 then "Cliente Normal" else if [Tipo Cliente] = 1 then "Buen Cliente" else if [Tipo Cliente] = 3 then "Mal Cliente" else null, type text)

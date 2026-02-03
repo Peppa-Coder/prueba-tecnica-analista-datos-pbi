@@ -30,7 +30,7 @@ table Peliculas
 		dataType: int64
 		formatString: 0
 		lineageTag: f9825bad-e882-40d8-bfe0-9455c0e75d97
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: Año
 
 		annotation SummarizationSetBy = Automatic
@@ -51,18 +51,25 @@ table Peliculas
 
 		annotation SummarizationSetBy = Automatic
 
+	column Id_Genero = LOOKUPVALUE(Datos[Id_Género], Datos[Id_Pelicula], Peliculas[Id_Pelicula])
+		formatString: 0
+		lineageTag: 2e84f74a-dcf4-4e7e-9d22-36705e8f0fca
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	partition Peliculas = m
 		mode: import
 		source =
 				let
-				    Origen = Folder.Files("C:\Users\mauri\OneDrive\Escritorio\Prueba 1 PB Avanzado\Datos"),
-				    #"C:\Users\mauri\OneDrive\Escritorio\Prueba 1 PB Avanzado\Datos\_DimPeliculas xlsx1" = Origen{[#"Folder Path"="C:\Users\mauri\OneDrive\Escritorio\Prueba 1 PB Avanzado\Datos\",Name="DimPeliculas.xlsx"]}[Content],
-				    #"Libro de Excel importado" = Excel.Workbook(#"C:\Users\mauri\OneDrive\Escritorio\Prueba 1 PB Avanzado\Datos\_DimPeliculas xlsx1"),
-				    Peliculas_Sheet = #"Libro de Excel importado"{[Item="Peliculas",Kind="Sheet"]}[Data],
-				    #"Encabezados promovidos" = Table.PromoteHeaders(Peliculas_Sheet, [PromoteAllScalars=true]),
-				    #"Tipo cambiado" = Table.TransformColumnTypes(#"Encabezados promovidos",{{"Id_Pelicula", Int64.Type}, {"Nombre Pelicula", type text}, {"Nombre Género", type text}, {"Año", Int64.Type}, {"Protagonistas", type text}, {"Director", type text}})
+				    Origen = Folder.Files("C:\Users\HR453WU\OneDrive - EY\Documents\GitHub\prueba-tecnica-analista-datos-pbi\data"),
+				    #"C:\Users\HR453WU\OneDrive - EY\Documents\GitHub\prueba-tecnica-analista-datos-pbi\data\_DimPeliculas xlsx" = Origen{[#"Folder Path"="C:\Users\HR453WU\OneDrive - EY\Documents\GitHub\prueba-tecnica-analista-datos-pbi\data\",Name="DimPeliculas.xlsx"]}[Content],
+				    #"Imported Excel Workbook" = Excel.Workbook(#"C:\Users\HR453WU\OneDrive - EY\Documents\GitHub\prueba-tecnica-analista-datos-pbi\data\_DimPeliculas xlsx"),
+				    Peliculas_Sheet = #"Imported Excel Workbook"{[Item="Peliculas",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Peliculas_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Id_Pelicula", Int64.Type}, {"Nombre Pelicula", type text}, {"Nombre Género", type text}, {"Año", Int64.Type}, {"Protagonistas", type text}, {"Director", type text}})
 				in
-				    #"Tipo cambiado"
+				    #"Changed Type"
 
 	annotation PBI_NavigationStepName = Navegación
 
